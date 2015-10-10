@@ -1,6 +1,7 @@
 #include "stack.h"
 #include <typeinfo>
 using namespace std;
+#include <string>
 
 int main()
 {
@@ -22,6 +23,10 @@ int main()
 	stack1.push(element2);
 
 	stack1 = stack2;
+
+	Stack<string> s;
+	string aso = "asa";
+	s.push(aso);
 
 	stack2.pop();
 	elem<int> fromPeek(stack2.peek());

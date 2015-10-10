@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 //until function is not used(compiles) it can have many errors (even compiles)
 
@@ -12,6 +14,7 @@ struct elem
 	 elem(const elem<T>  &other)
 	 {
 		 data = other.data;
+		 //strcpy(other.data, data);
 		 next = other.next;
 	 }
 };
@@ -23,21 +26,20 @@ class Stack
 private:
 	elem<T> * pointer;
 
+	void free();
+	void allocate(const Stack &other);
+
 public:
 	Stack(const elem<T> &box);
-
 	Stack();
 	Stack(const Stack &other);
 	Stack& Stack<T>::operator=(const Stack& other);
 	~Stack();
 
-	void free();
-	void allocate(const Stack &other);
-
 public:
 	bool isEmpty()const;
 	void push(const elem<T>& box);
-	void pop();
+	T pop();
 	const T& peek()const;
 };
 
@@ -114,16 +116,16 @@ void Stack<T>::push(const elem<T>& box)
 }
 
 template<class T>
-void Stack<T>::pop()
+T Stack<T>::pop()
 {
 	if (isEmpty())
 	{
-		free();
-		return;
+		throw "Empty stack";
 	}
 	elem<T>* pOld = pointer;
 	pointer = pOld->next;
 	pOld->next = NULL;
+	return pOld -> data;
 }
 
 template<class T>
